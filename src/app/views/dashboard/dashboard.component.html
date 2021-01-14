@@ -1,0 +1,95 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          Authers
+        </div>
+        <div class="card-body">
+          <br>
+          <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-sm table-striped table-bordered">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of users">
+                  <td>{{ user.id }}</td>
+                  <td>{{ user.first_name }}  </td>
+                  <td>{{ user.last_name }}</td>
+                  <td> <button type="button" class="btn btn-block btn-ghost-primary btn-sm" (click)="onEditClick(user)">Edit</button></td>
+                </tr>
+            </tbody>
+            </table>
+            <div bsModal #infoModal="bs-modal" class="modal fade" tabindex="-1" (onHide)="onHideModal()" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-info modal-lg" role="document">
+
+                <div class="modal-content">
+                  <form class="form-horizontal"  [formGroup]="updateUserForm" (ngSubmit)="onSubmit()">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Edit User</h4>
+                    <button type="button" class="close" (click)="infoModal.hide()" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+
+                      <div class="card-body">
+
+                          <div class="form-group row">
+                            <label class="col-md-3 col-form-label" for="email" >Email</label>
+                            <div class="col-md-9">
+                              <input type="email" id="email" name="email" disabled formControlName="email"    class="form-control" placeholder="Enter Email.." autocomplete="email">
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label class="col-md-3 col-form-label" for="first_name">First Name</label>
+                            <div class="col-md-9">
+                              <input type="first_name" id="first_name" name="first_name" disabled formControlName="first_name"   class="form-control" placeholder="First Name.." autocomplete="email">
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label class="col-md-3 col-form-label" for="last_name">Last Name</label>
+                            <div class="col-md-9">
+                              <input type="last_name" id="last_name" name="last_name"  disabled formControlName="last_name"   class="form-control" placeholder="Last Name.." autocomplete="email">
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label class="col-md-3 col-form-label" for="contact_number">Contact Number</label>
+                            <div class="col-md-9">
+                              <input type="number" id="contact_number" name="contact_number" disabled formControlName="contact_number"  class="form-control" placeholder="Enter Contact Number" autocomplete="current-password">
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label class="col-md-3 col-form-label" for="contact_number">Status</label>
+                            <div class="col-md-9">
+                              <label class="switch switch-label switch-pill switch-success">
+                                <input type="checkbox" id="status" name="status" class="switch-input" formControlName="contact_number"  [(checked)]="f.is_active.value" (change)="handleStatusChange($event)">
+                                <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>
+                              </label>
+                            </div>
+                          </div>
+
+
+                      </div>
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" (click)="infoModal.hide()">Close</button>
+                    <button type="button" class="btn btn-info" type="submit">Save changes</button>
+                  </div>
+                </form>
+                </div><!-- /.modal-content -->
+              </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+
+
+        </div>
+      </div>
+    </div><!--/.col-->
+  </div><!--/.row-->
+</div>
